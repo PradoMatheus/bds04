@@ -1,6 +1,6 @@
 package com.devsuperior.bds04.controllers;
 
-import com.devsuperior.bds04.dto.CityDTO;
+import com.devsuperior.bds04.dto.CityDto;
 import com.devsuperior.bds04.tests.TokenUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +49,7 @@ public class CityControllerIT {
     @Test
     public void insertShouldReturn401WhenNoUserLogged() throws Exception {
 
-        CityDTO dto = new CityDTO(null, "Recife");
+        CityDto dto = new CityDto(null, "Recife");
         String jsonBody = objectMapper.writeValueAsString(dto);
 
         ResultActions result = mockMvc.perform(post("/cities").content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
@@ -62,7 +62,7 @@ public class CityControllerIT {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, clientUsername, clientPassword);
 
-        CityDTO dto = new CityDTO(null, "Recife");
+        CityDto dto = new CityDto(null, "Recife");
         String jsonBody = objectMapper.writeValueAsString(dto);
 
         ResultActions result = mockMvc.perform(post("/cities").header("Authorization", "Bearer " + accessToken).content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
@@ -75,7 +75,7 @@ public class CityControllerIT {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-        CityDTO dto = new CityDTO(null, "Recife");
+        CityDto dto = new CityDto(null, "Recife");
         String jsonBody = objectMapper.writeValueAsString(dto);
 
         ResultActions result = mockMvc.perform(post("/cities").header("Authorization", "Bearer " + accessToken).content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
@@ -90,7 +90,7 @@ public class CityControllerIT {
 
         String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-        CityDTO dto = new CityDTO(null, "    ");
+        CityDto dto = new CityDto(null, "    ");
         String jsonBody = objectMapper.writeValueAsString(dto);
 
         ResultActions result = mockMvc.perform(post("/cities").header("Authorization", "Bearer " + accessToken).content(jsonBody).contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
